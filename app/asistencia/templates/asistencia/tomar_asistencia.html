@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+
+    <div class="bg-white shadow-xl rounded-2xl p-6 w-full max-w-xl text-center">
+
+        <h2 class="text-2xl font-bold mb-4 text-gray-800">
+            📸 Reconocimiento Facial
+        </h2>
+
+        <!-- Cámara -->
+        <div class="relative">
+            <video id="video" autoplay
+                class="w-full rounded-xl border-4 border-gray-300 shadow-md">
+            </video>
+        </div>
+
+        <!-- Botón -->
+        <button onclick="capturar()"
+            class="mt-5 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
+            📸 Tomar Asistencia
+        </button>
+
+        <!-- Form oculto -->
+        <form id="form" method="POST" style="display:none;">
+            {% csrf_token %}
+            <input type="hidden" name="imagen" id="imagen_input">
+        </form>
+
+        <!-- Canvas oculto -->
+        <canvas id="canvas" class="hidden"></canvas>
+
+    </div>
+
+</div>
+
+<script>
+const video = document.getElementById('video');
+
+// 🎥 Activar cámara
+navigator.mediaDevices.getUserMedia({ video: true })
+    .then(stream => {
+        video.srcObject = stream;
+    })
+    .catch(err => {
+        alert("No se pudo acceder a la cámara");
+        console.error(err);
+    });
+
+// 📸 Capturar imagen
+function capturar() {
+    const canvas = document.getElementById('canvas');
+    const context = canvas.getContext('2d');
+
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    const dataURL = canvas.toDataURL('image/jpeg');
+
+    document.getElementById('imagen_input').value = dataURL;
+    document.getElementById('form').submit();
+}
+</script>
+
+{% endblock %}

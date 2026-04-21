@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="main">
+  <h2>Reporte Personal de {{ estudiante.nombre }} {{ estudiante.apellido }}</h2>
+  <a href="{% url 'reporteAsistencia:exportar_personal_pdf' estudiante.RU %}">Descargar PDF</a>
+  <table>
+    <tr><th>Paralelo</th><th>Fecha</th><th>Hora</th><th>Tipo</th></tr>
+    {% for a in asistencias %}
+    <tr>
+      <td>{{ a.paralelo.nombre }}</td>
+      <td>{{ a.fecha_ingreso }}</td>
+      <td>{{ a.hora_ingreso }}</td>
+      <td>Credenciales</td>
+    </tr>
+    {% endfor %}
+    {% for b in asistencias_bio %}
+    <tr>
+      <td>{{ b.paralelo.nombre }}</td>
+      <td>{{ b.fecha_registro }}</td>
+      <td>{{ b.hora_registro }}</td>
+      <td>Biométrica</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte Diario PDF</title>
+    <style>
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid black; padding: 5px; text-align: left; }
+        h2 { text-align: center; }
+    </style>
+</head>
+<body>
+    <h2>Reporte Diario - {{ hoy }}</h2>
+    <table>
+        <tr><th>RU</th><th>Nombre</th><th>Paralelo</th><th>Hora</th><th>Tipo</th></tr>
+        {% for a in asistencias %}
+        <tr><td>{{ a.estudiante.RU }}</td><td>{{ a.estudiante.nombre }} {{ a.estudiante.apellido }}</td>
+            <td>{{ a.paralelo.nombre }}</td><td>{{ a.hora_ingreso }}</td><td>Credenciales</td></tr>
+        {% endfor %}
+        {% for b in asistencias_bio %}
+        <tr><td>{{ b.estudiante.RU }}</td><td>{{ b.estudiante.nombre }} {{ b.estudiante.apellido }}</td>
+            <td>{{ b.paralelo.nombre }}</td><td>{{ b.hora_registro }}</td><td>Biométrica</td></tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

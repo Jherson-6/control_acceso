@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class ReporteasistenciaConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'reporteAsistencia'
+    name = 'app.reporteAsistencia'

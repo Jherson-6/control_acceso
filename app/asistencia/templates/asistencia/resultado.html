@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+
+    <div class="bg-white shadow-xl rounded-2xl p-8 text-center w-full max-w-md">
+
+        <h2 class="text-2xl font-bold mb-4 text-gray-800">
+            {{ mensaje }}
+        </h2>
+
+        {% if estudiante %}
+        <div class="bg-gray-50 p-4 rounded-lg shadow-inner mb-4">
+            <p class="text-lg font-semibold">
+                👤 {{ estudiante.nombre }} {{ estudiante.apellido }}
+            </p>
+            <p class="text-gray-600">
+                RU: {{ estudiante.RU }}
+            </p>
+        </div>
+        {% endif %}
+
+        <a href="{% url 'tomar_asistencia' %}"
+           class="inline-block mt-4 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg transition">
+            🔄 Volver
+        </a>
+
+    </div>
+
+</div>
+{% endblock %}

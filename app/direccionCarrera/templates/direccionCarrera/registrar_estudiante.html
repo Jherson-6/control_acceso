@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block sidebar %}
+
+{% include "direccionCarrera/navBar.html" %}
+
+{% endblock %}
+
+{% block content %}
+    <h1 class="text-3xl font-bold text-gray-800 mb-8">Registrar Estudiante</h1>
+
+    <div class="bg-white shadow-lg rounded-xl p-8 max-w-3xl">
+      <form method="post" enctype="multipart/form-data" class="grid grid-cols-2 gap-6">
+        {% csrf_token %}
+
+        <div>
+          <label class="text-gray-500 text-sm">RU</label>
+          <input type="text" name="ru" class="border rounded w-full p-2 mt-1" required>
+        </div>
+
+        <div>
+          <label class="text-gray-500 text-sm">CI</label>
+          <input type="password" name="password" class="border rounded w-full p-2 mt-1" required>
+        </div>
+
+        <div>
+          <label class="text-gray-500 text-sm">Nombre</label>
+          <input type="text" name="nombre" class="border rounded w-full p-2 mt-1" required>
+        </div>
+
+        <div>
+          <label class="text-gray-500 text-sm">Apellido</label>
+          <input type="text" name="apellido" class="border rounded w-full p-2 mt-1" required>
+        </div>
+
+        <div>
+          <label class="text-gray-500 text-sm">Correo</label>
+          <input type="email" name="correo" class="border rounded w-full p-2 mt-1" required>
+        </div>
+
+        <div>
+          <label class="text-gray-500 text-sm">Fecha de nacimiento</label>
+          <input type="date" name="fecha_nacimiento" class="border rounded w-full p-2 mt-1" required>
+        </div>
+
+
+        <div>
+          <label class="text-gray-500 text-sm">Semestre</label>
+          <select name="semestre" class="border rounded w-full p-2 mt-1" required>
+            <option value="" disabled selected>Seleccione semestre</option>
+            {% for s in semestres %}
+              <option value="{{ s.pk }}">
+                {{ s.nombre }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div>
+          <label class="text-gray-500 text-sm">Paralelo</label>
+          <select name="paralelo" class="border rounded w-full p-2 mt-1" required>
+            <option value="" disabled selected>Seleccione paralelo</option>
+            {% for p in paralelos %}
+              <option value="{{ p.pk }}">
+                {{ p.numeroParalelo }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+
+
+        <div class="col-span-2">
+          <label class="text-gray-500 text-sm">Foto</label>
+          <input type="file" name="foto" accept="image/*" class="border rounded w-full p-2 mt-1" required>
+        </div>
+
+
+        <div class="col-span-2">
+          <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Registrar</button>
+        </div>
+      </form>
+    </div>
+  </main>
+</div>
+
+{% endblock %}

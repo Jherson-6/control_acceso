@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte Personal PDF</title>
+    <style>
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid black; padding: 5px; text-align: left; }
+        h2 { text-align: center; }
+    </style>
+</head>
+<body>
+    <h2>Reporte Personal de {{ estudiante.nombre }} {{ estudiante.apellido }}</h2>
+    <p>RU: {{ estudiante.RU }}</p>
+    <p>Carrera: {{ estudiante.carrera.nombre }}</p>
+    <table>
+        <tr><th>Paralelo</th><th>Fecha</th><th>Hora</th><th>Tipo</th></tr>
+        {% for a in asistencias %}
+        <tr><td>{{ a.paralelo.nombre }}</td><td>{{ a.fecha_ingreso }}</td><td>{{ a.hora_ingreso }}</td><td>Credenciales</td></tr>
+        {% endfor %}
+        {% for b in asistencias_bio %}
+        <tr><td>{{ b.paralelo.nombre }}</td><td>{{ b.fecha_registro }}</td><td>{{ b.hora_registro }}</td><td>Biométrica</td></tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
